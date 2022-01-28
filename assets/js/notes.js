@@ -75,4 +75,10 @@ Step 8:
             - add the container element/append child before the for loop!
             - add a alert for no open issues
     Step 8.3: add extra message when a repo has more than 30 issues
+            - we can't view more than 30 at a time due to pagination (Github limits results- cost effective)
+            - however, we can see if there is an HTTP header in the response by console.log((response.headers.get("Link"));
+            - create a new container in the HTML (div)
+            - create a DOM reference to the container limitWarningEl
+            - create displayWarning function w/ repo parameter to display a text warning
+                - append link element w/ href attribute pointing to the HTTP link
 */

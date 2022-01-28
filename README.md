@@ -44,6 +44,7 @@ Inspect browser requests and server responses with the Chrome DevTools Network t
 [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 [Curl Sourcecode](https://github.com/curl/curl)
 [Font Awesome](https://fontawesome.com/)
+[HTTP Header documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
 
 ## Bootcamp
 
