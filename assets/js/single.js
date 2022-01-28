@@ -4,6 +4,30 @@ var issueContainerEl = document.querySelector("#issues-container");
 // reference to limit warning container
 var limitWarningEl = document.querySelector("#limit-warning");
 
+// DOM reference to span id
+var repoNameEl = document.querySelector("#repo-name");
+
+// 
+var getRepoName = function () {
+    // Assigned query string
+    var queryString = document.location.search;
+    // use the split method to get the username/name of repo
+    // splits the query into an array (with [1] targetting the username/repo name)
+    var repoName = queryString.split("=")[1];
+    console.log(repoName);
+
+    // conditional statement to check that valid values exist
+    if(repoName) {
+        // use the DOM variable to update the element's HTML text content
+        repoNameEl.textContent = repoName;
+        // call next function
+        getRepoIssues(repoName);
+      }
+      else {
+        document.location.replace("./index.html");
+      }
+}
+
 // make a request to the GitHub API with a repository's name
 var getRepoIssues = function(repo) {
     // request for indidivual issues (as the endpoint) with appended direction
@@ -25,8 +49,8 @@ var getRepoIssues = function(repo) {
           });
         }
         else {
-          console.log(response);
-          alert("There was a problem with your request!");
+         // if not successful, redirect to homepage
+        document.location.replace("./index.html");
         }
       });
   };
@@ -88,4 +112,4 @@ var displayWarning = function(repo) {
     limitWarningEl.appendChild(linkEl);
   };
 
-getRepoIssues("facebook/react");
+getRepoName ();

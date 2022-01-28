@@ -56,29 +56,59 @@ Step 7: Handle errors that may occur when working with Github's API
             - if an empty array is returned, we alert the user
     Step 7.3: Catching Newtowrk Errors
             - use the .catch method to check if the request fails- if so, the user is alerted
+
 --- BREAK: We want to create a seccond page which displays the open issues for a user's repo once clicked
-Step 8: 
-    Step 8.1: Fetch the API data
-            - Set up the HTML and jS files
-            - create getReopIssues function to take a repo name as a parameter
+Step 1: Create the new HTML/jS files (single-repo.html, and single.js)
+Step 2: Fetch the API data
+    Step 2.3: create getReopIssues function to take a repo name as a parameter
             - request for indidivual issues (as the endpoint) with appended direction
-    Step 8.2: Convert API fetch data response into DOM elements
-            - create function displayIssues to display the issues
+Step 3: Convert API fetch data response into DOM elements
+    Step 3.1: create function displayIssues to display the issues
             - in getRepoIssues: use conditional statment to check request was successful
                 - pass the data to a dom function
             - in displayIssues create a for loop to loop over the repsponse data and create <a> elements for each issue
                 - the data for issues has a html_url property which links to the issue on Github
             - double check the properties of data recieved
-            - create a span for the title, append to container
-            - create an element, use conditional statemenet to check if it is an issue or pull request, append element
+    Step 3.2: create a span for the title, append to container
+    Step 3.4: create an element, use conditional statemenet to check if it is an issue or pull request, append element
             - create a reference to the issues container (to display appended elements)
             - add the container element/append child before the for loop!
-            - add a alert for no open issues
-    Step 8.3: add extra message when a repo has more than 30 issues
+    Step 3.5: add a alert for no open issues
+Step 4: add extra message when a repo has more than 30 issues
             - we can't view more than 30 at a time due to pagination (Github limits results- cost effective)
             - however, we can see if there is an HTTP header in the response by console.log((response.headers.get("Link"));
-            - create a new container in the HTML (div)
-            - create a DOM reference to the container limitWarningEl
-            - create displayWarning function w/ repo parameter to display a text warning
-                - append link element w/ href attribute pointing to the HTTP link
+    Step 4.1: create a new container in the HTML (div)
+    Step 4.2: create a DOM reference to the container limitWarningEl
+    Step 4.3: create displayWarning function w/ repo parameter to display a text warning
+            - append link element w/ href attribute pointing to the HTTP link
+
+--- BREAK: We want to add the ability click on a repo name from the list, and a new page loads w/ open issues
+Step 1. Pass information from one page to another using query parameters
+    Step 1.1: create a link between pages
+            - in the homepage.js file, change the create div element in the for loop of displayRepos to a <a> element w/ link
+                - link takes you to the single-repo html
+            - adjust the href to contain the query parameter, the selected repo's name (already stored in repoName)
+                - this will change the URL in the address bar - not quite there yet.
+Step 2: Obtain data from a URL using browser-provided location objects
+    Step 2.1: Read and use data from the query parameter
+            - locate the query string in the URL through jS by using document.location.search in the console
+Step 3: Make the API call dynamic by using the query parameter to alter the request
+    Step 3.1: in single.js, extract the query value from the query string in the API call function getRepiIssues
+            - create a new function getRepoNames
+            - remove the hardcoded function call for getRepoIssues
+            - use the location object and split method to extract the repo name from the query string
+    Step 3.2: pass the repoName variable until the getReopIssues function
+            - use repoName to fetch the related issues from the Github API issues endpoint
+            - add reponame to the header of the page by targeting the span id repo-name through variable repoNameEl
+            - in the getRepoName- add repoNameEl.textContent = repoName to update the element's text content
+Step 4: Error handling
+    Step 4.1: If a query parameter is unavailable, we should redirect the user back to the index.html page to try entering a username again.
+            - add a conditional statement to getRepoName to check that valid values exist 
+              before passing to their respective function calls
+                - The preceding conditional statement will only display the repo name 
+                and make the fetch call if the value for repoName exists.
+                - if no reponame exists, the .replace method will take the user back to the homepage
+            - By checking to see if the query parameter is available, we can preempt a potential error 
+              before it ever reaches the API call.
+    Step 4.2: Change the alert in the getRepoIssues to the .replace method to prevent the API call from being reached
 */

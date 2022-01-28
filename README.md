@@ -45,6 +45,8 @@ Inspect browser requests and server responses with the Chrome DevTools Network t
 [Curl Sourcecode](https://github.com/curl/curl)
 [Font Awesome](https://fontawesome.com/)
 [HTTP Header documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+[Query String Wiki](https://en.wikipedia.org/wiki/Query_string)
+[Location of Web API](https://developer.mozilla.org/en-US/docs/Web/API/Location)
 
 ## Bootcamp
 
