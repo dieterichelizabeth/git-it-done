@@ -1,4 +1,12 @@
 /*
+Project goals:
+Use the fetch API to send requests to a server-side API
+Receive and parse data in the JSON format
+Use returned data to dynamically generate HTML
+Handle response codes and metadata, including headers, status, and URL
+*/
+
+/*
 PsuedoCoding
 Step 1: create funtion getUserRepos to fetch data from the 
     Github API and return JSON data
@@ -111,4 +119,21 @@ Step 4: Error handling
             - By checking to see if the query parameter is available, we can preempt a potential error 
               before it ever reaches the API call.
     Step 4.2: Change the alert in the getRepoIssues to the .replace method to prevent the API call from being reached
+*/
+
+/* 
+Terms/concepts:
+Client-side API vs. server-side API
+Client-server model and request-response pattern
+Implement the differences between HTTP GET requests using XMLHTTPRequest, jQuery AJAX, and the fetch API
+HTTP response codes and handle response metadata with fetch API
+Parse JSON to dynamically generate HTML
+Benefits and challenges of working with asynchronous JavaScript
+Implement query string parameters
+Server-side API documentation.
+Use the browser's Fetch API to communicate with a server.
+Inspect browser requests and server responses with the Chrome DevTools Network tab.
+Pass information from one page to another with query parameters (much like you did with the GitHub API call).
+Read from the query string and redirect the page with the document.location object.
+Create a dynamic API call based on a user selection.
 */
