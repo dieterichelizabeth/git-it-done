@@ -62,9 +62,17 @@ Step 8:
             - Set up the HTML and jS files
             - create getReopIssues function to take a repo name as a parameter
             - request for indidivual issues (as the endpoint) with appended direction
-            - convert the API fetch data response into DOM elements
-
-
-- to append API data, we need to make a new container element to hold it.
-- add extra message when a repo has more than 30 issues
+    Step 8.2: Convert API fetch data response into DOM elements
+            - create function displayIssues to display the issues
+            - in getRepoIssues: use conditional statment to check request was successful
+                - pass the data to a dom function
+            - in displayIssues create a for loop to loop over the repsponse data and create <a> elements for each issue
+                - the data for issues has a html_url property which links to the issue on Github
+            - double check the properties of data recieved
+            - create a span for the title, append to container
+            - create an element, use conditional statemenet to check if it is an issue or pull request, append element
+            - create a reference to the issues container (to display appended elements)
+            - add the container element/append child before the for loop!
+            - add a alert for no open issues
+    Step 8.3: add extra message when a repo has more than 30 issues
 */
