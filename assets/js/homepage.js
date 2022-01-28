@@ -89,8 +89,8 @@ var displayRepos = function(repos, searchTerm) {
         statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
         }
     
-    // the order of appended elements defines where the element will be placed
-    // (ex. titleEl goes first since you want that to the farthest right)
+    /* the order of appended elements defines where the element will be placed
+       (ex. titleEl goes first since you want that to the farthest right)*/
     // append to container
         repoEl.appendChild(titleEl);
     
@@ -102,52 +102,8 @@ var displayRepos = function(repos, searchTerm) {
   }
   };
 
-
-// // call the getUserRepos function passing my username (step1)
-// getUserRepos("dieterichelizabeth");
-// console.log("outside");
-
 // submit even listener
 userFormEl.addEventListener("submit", formSubmitHandler);
 
-  /*
-  Notes: 
-  You can liken an API endpoint to a function in the sense that the same base URL 
-  can return different data depending on the argument(s) given.
-  getUserRepos(user); // https://api.github.com/users/<user>/repos
-  */
+  
 
-/*
-Step 1: create funtion getUserRepos to fetch data from the 
-    Github API and return JSON data
-Step 2: create function formSubmitHandler to 
-    recieve data from form submission and return through get User Repos
-Step 3: create function displayRepos to display both the repos list and search term
-    then create a for loop within the funciton to diplay the results in html
-Step 4: add if statements to the getUserRepos function to 
-    - check the username is valid via Github's API (404 response)
-    - check if the user has repositories
-    - catch network errors
-*/
-
-/*
-ADDITIONAL NOTES
-    fetch(apiUrl).then(function(response) {
-    // The jason method then returns another promise which callback function captures the data (step1)
-      response.json().then(function(data) {
-        console.log(data);
-      });
-      
-    // when the response data is converted to JSON- it is sent from getUserRepos to displayRepos (step2)
-    // use an if else statement to prevent 404 error
-    // if the username does not exist- then window alert
-    // when the HTTP request status code is in the 200's- the ok property will be true
-    if (response.ok) {
-        response.json().then(function(data) {
-          displayRepos(data, user);
-        });
-      } else {
-        alert("Error: GitHub User Not Found");
-      }
-    }); 
-    */
