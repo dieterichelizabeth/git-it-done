@@ -7,7 +7,6 @@ var repoSearchTerm = document.querySelector("#repo-search-term");
 
 // function to be executed upon a form submission
 var formSubmitHandler = function(event) {
-    // preventDefault prevents the browser from sending the fomr's input data to a URL and lets jS handle
     event.preventDefault();
     // get value from input element via nameInputEl DOM variable and store it in "username" variable
     // trim helps with user submission (if the user leaves spaces in the form)

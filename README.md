@@ -38,6 +38,7 @@ Inspect browser requests and server responses with the Chrome DevTools Network t
 [API blog](https://coding-boot-camp.github.io/full-stack/)
 [API Documentation](https://docs.github.com/en/rest)
 [API Documentation - repositories endpoint](https://docs.github.com/en/rest/reference/repos)
+[API Documentation - issues](https://docs.github.com/en/rest/reference/issues)
 [JSON Formatter extension](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en)
 [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 [Curl Sourcecode](https://github.com/curl/curl)
