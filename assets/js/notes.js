@@ -56,4 +56,9 @@ Step 7: Handle errors that may occur when working with Github's API
             - if an empty array is returned, we alert the user
     Step 7.3: Catching Newtowrk Errors
             - use the .catch method to check if the request fails- if so, the user is alerted
+Step 8: 
+
+- Set up the HTML and jS files
+- convert the API fetch data response into DOM elements
+- add extra message when a repo has more than 30 issues
 */
