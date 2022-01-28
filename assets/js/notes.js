@@ -119,6 +119,38 @@ Step 4: Error handling
             - By checking to see if the query parameter is available, we can preempt a potential error 
               before it ever reaches the API call.
     Step 4.2: Change the alert in the getRepoIssues to the .replace method to prevent the API call from being reached
+
+--- BREAK We want to add buttons which allow the user to filter the repo by programming language
+Step 1: Create a function to call the Github Search API
+    Step 1.1: in homepage.js, create a new function that accepts a language parameter, creates an API endpoint,
+              and makes an HTTP request to that endpoint using fetch()
+            - test the feature by typing getFeaturedRepos("javascript"); in the console
+            - add the then method and log response to the console
+            - add error handling for bad responses
+    Step 1.2: since the reponse comes back as the HTTP, use a json method to extract JSON from the response
+Step 2: Display the API data on the page
+    Step 2.1: pass data.items and language to the displayRepos function
+            - call getFeaturedRepos("javascript"); in the console to make sure it's working- success!
+Step 3: Add language buttons in the HTML
+    Step 3.1: Below the <div> that holds the <form> element in the left column, 
+             create another <div> element with a class attribute value of card. 
+            -That left column should now have two <div> elements with a class of card.
+    Step 3.2: Inside that <div>, create an <h3> element with text content that says "Search By Topic". 
+            - Give it a class attribute with two values: card-header and text-uppercase.
+    Step 3.3: Right underneath the <h3> element, create another <div>, with a class attribute of card-body and 
+              an id attribute of language-buttons.
+            - make three button elements for jS, HTML, and CSS
+                - give each a class attribute vale of btn
+                - and a data attribute called data'language, with a value of the topic the button will
+                  search for when clicked. Make the value lowercase
+Step 4: Call the API function when buttons are clicked in the homepage.js
+    Step 4.1: add the variable to store the language button id
+    Step 4.2: add an event listener to the div element 
+    Step 4.3: create a function (buttonClickHandler) with event delegation 
+            - accepts an event as a parameter
+            - create a variable language with a value of event.target.getAttribute("data-language")
+    Step 4.4: call the getFeaturedRepos function
+            - clear old content in the container
 */
 
 /* 
@@ -136,4 +168,7 @@ Inspect browser requests and server responses with the Chrome DevTools Network t
 Pass information from one page to another with query parameters (much like you did with the GitHub API call).
 Read from the query string and redirect the page with the document.location object.
 Create a dynamic API call based on a user selection.
+Recognize which options are available for GitHub API endpoints.
+Use multiple parameters in a query string.
+Use HTML attributes to dynamically update an API call.
 */
