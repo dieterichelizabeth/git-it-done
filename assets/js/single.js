@@ -1,115 +1,97 @@
-// reference to the issues container
+// Variable references
 var issueContainerEl = document.querySelector("#issues-container");
-
-// reference to limit warning container
 var limitWarningEl = document.querySelector("#limit-warning");
-
-// DOM reference to span id
 var repoNameEl = document.querySelector("#repo-name");
 
-// 
 var getRepoName = function () {
-    // Assigned query string
-    var queryString = document.location.search;
-    // use the split method to get the username/name of repo
-    // splits the query into an array (with [1] targetting the username/repo name)
-    var repoName = queryString.split("=")[1];
-    console.log(repoName);
+  // Get the repo name from the url query string
+  var queryString = document.location.search;
+  var repoName = queryString.split("=")[1];
 
-    // conditional statement to check that valid values exist
-    if(repoName) {
-        // use the DOM variable to update the element's HTML text content
-        repoNameEl.textContent = repoName;
-        // call next function
-        getRepoIssues(repoName);
-      }
-      else {
-        document.location.replace("./index.html");
-      }
-}
+  if (repoName) {
+    // Display the repo name on the page
+    repoNameEl.textContent = repoName;
 
-// make a request to the GitHub API with a repository's name
-var getRepoIssues = function(repo) {
-    // request for indidivual issues (as the endpoint) with appended direction
-    var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
-
-    // fetch request passing variable apiURL (which holds the query)
-    fetch(apiUrl).then(function(response) {
-        // request was successful 
-        if (response.ok) {
-          // (use the pormise syntax to access the data contained)  
-          response.json().then(function(data) {
-            // pass response data to dom function
-            displayIssues(data);
-            
-            // check if api has paginated issues
-            if (response.headers.get("Link")) {
-                displayWarning(repo);
-            }
-          });
-        }
-        else {
-         // if not successful, redirect to homepage
-        document.location.replace("./index.html");
-        }
-      });
-  };
-  
-// display all the issues associated with that repository.
-var displayIssues = function(issues) {
-
-    // check if there are open issues in the repository
-    if (issues.length === 0) {
-        issueContainerEl.textContent = "This repo has no open issues!";
-        return;
-      }
-
-    // loops over the response data to create <a> elements
-    for (var i = 0; i < issues.length; i++) {
-        // create a link element to take users to the issue on github
-        var issueEl = document.createElement("a");
-        issueEl.classList = "list-item flex-row justify-space-between align-center";
-        issueEl.setAttribute("href", issues[i].html_url);
-        // opens the link at a new tab instead of replacing the current webpage
-        issueEl.setAttribute("target", "_blank");
-    
-        // create span to hold issue title
-        var titleEl = document.createElement("span");
-        titleEl.textContent = issues[i].title;
-
-        // append to container
-        issueEl.appendChild(titleEl);
-
-        // create a type element
-        var typeEl = document.createElement("span");
-
-        // check if issue is an actual issue or a pull request
-        if (issues[i].pull_request) {
-        typeEl.textContent = "(Pull request)";
-        } else {
-        typeEl.textContent = "(Issue)";
-        }
-
-        // append to container
-        issueEl.appendChild(typeEl);
-
-        issueContainerEl.appendChild(issueEl);
-}
+    getRepoIssues(repoName);
+  } else {
+    // If no repo was given, redirect to the homepage
+    document.location.replace("./index.html");
+  }
 };
 
-// display warning function (more than 30 issues)
-var displayWarning = function(repo) {
-    // add text to warning container
-    limitWarningEl.textContent = "To see more than 30 issues, visit ";
+var getRepoIssues = function (repo) {
+  // Format the github api url
+  var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
 
-    // create link element
-    var linkEl = document.createElement("a");
-    linkEl.textContent = "See More Issues on GitHub.com";
-    linkEl.setAttribute("href", "https://github.com/" + repo + "/issues");
-    linkEl.setAttribute("target", "_blank");
-  
-    // append to warning container
-    limitWarningEl.appendChild(linkEl);
-  };
+  // Make a request to the url
+  fetch(apiUrl).then(function (response) {
+    // If the request was successful
+    if (response.ok) {
+      response.json().then(function (data) {
+        displayIssues(data);
 
-getRepoName ();
+        // Check if api has paginated issues
+        if (response.headers.get("Link")) {
+          displayWarning(repo);
+        }
+      });
+    } else {
+      // Else, redirect to homepage
+      document.location.replace("./index.html");
+    }
+  });
+};
+
+var displayIssues = function (issues) {
+  // Check for open issues in the repo
+  if (issues.length === 0) {
+    issueContainerEl.textContent = "This repo has no open issues!";
+    return;
+  }
+
+  // Loop over given issues
+  for (var i = 0; i < issues.length; i++) {
+    // Create a link element to take users to the issue on Github
+    var issueEl = document.createElement("a");
+    issueEl.classList = "list-item flex-row justify-space-between align-center";
+    issueEl.setAttribute("href", issues[i].html_url);
+    issueEl.setAttribute("target", "_blank");
+
+    // Create span to hold issue title and append
+    var titleEl = document.createElement("span");
+    titleEl.textContent = issues[i].title;
+    issueEl.appendChild(titleEl);
+
+    // create a type element
+    var typeEl = document.createElement("span");
+
+    // check if issue is an actual issue or a pull request
+    if (issues[i].pull_request) {
+      typeEl.textContent = "(Pull request)";
+    } else {
+      typeEl.textContent = "(Issue)";
+    }
+
+    // Append to container
+    issueEl.appendChild(typeEl);
+
+    // Append to the DOM
+    issueContainerEl.appendChild(issueEl);
+  }
+};
+
+var displayWarning = function (repo) {
+  // Add text to warning container
+  limitWarningEl.textContent = "To see more than 30 issues, visit ";
+
+  // Create link element
+  var linkEl = document.createElement("a");
+  linkEl.textContent = "See More Issues on GitHub.com";
+  linkEl.setAttribute("href", "https://github.com/" + repo + "/issues");
+  linkEl.setAttribute("target", "_blank");
+
+  // Append to warning container
+  limitWarningEl.appendChild(linkEl);
+};
+
+getRepoName();
